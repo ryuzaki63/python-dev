@@ -17,7 +17,7 @@ import socket
 #################################################
 
 
-hote = "127.0.0.1"
+hote = "192.168.0.25"
 port = 5050
 message = " "
 
@@ -38,5 +38,5 @@ while message != 'stop':
 	mesage = message.encode()
 	client_side.send(message)
 	recus = client_side.recv(2048)
-	recus = recus.decode()
+	recus = recus.decode(encoding="utf-8", errors="ignore")
 	print(recus)
